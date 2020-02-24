@@ -7,7 +7,7 @@ module.exports = {
   output: { filename: "bundle.js" },
   module: {
     rules: [
-        { test: /\.jsx?$/, loader: ['babel-loader', 'eslint-loader'] },
+        { test: /\.(jsx|js)?$/, loader: ['babel-loader', 'eslint-loader'] },
         {
             test: /\.css$/,
             use: [{
@@ -26,5 +26,5 @@ module.exports = {
   },
   plugins: [new HtmlWebpackPlugin({
     template: './src/index.html'
-  })],
+  })]
 };
