@@ -1,8 +1,12 @@
 import React from 'react'
+import { Content } from './layout-style'
 
-export const Layout = (props) => (
+export const Layout = (props) => {
+
+    return (
     <>
         <div>Toolbar, Sidedrawer, Backdrop</div>
-        <main>{props.children}</main>
+        <Content>{props.children}</Content>
     </>
-)
+    )
+}

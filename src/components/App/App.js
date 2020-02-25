@@ -1,10 +1,15 @@
 import React from 'react'
 import { Layout } from '../'
+import { BurgerBuilder } from '../../containers'
 
 export const App = () => {
     return (
         <>
-            <div><Layout>App</Layout></div>
+            <div>
+                <Layout>
+                    <BurgerBuilder />
+                </Layout>
+            </div>
         </>
     )
 }
