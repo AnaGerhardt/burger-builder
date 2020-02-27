@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import { Burger } from '../../components'
+import { Burger, BuildControls } from '../../components'
 
 export const BurgerBuilder = () => {
 
     const [ingredientState, setIngredientState] = useState
     ({
-        salad: 1,
-        bacon: 1,
-        cheese: 2,
-        meat: 2
+        salad: 0,
+        bacon: 0,
+        cheese: 0,
+        meat: 0
     })
 
     return (
         <>
             <Burger ingredients={ingredientState} />
-            <div>Build Controls</div>
+            <BuildControls />
         </>
     )
 }
