@@ -15,9 +15,17 @@ export const BuildControls = (props) => {
     return (
     <>
         <div className='BuildControls'>
+            <p>Current price: <strong>{props.price.toFixed(2)} dollars </strong></p>
             {controls.map(ctrl => (
-                <BuildControl key={ctrl.label} label={ctrl.label} />
+                <BuildControl 
+                    key={ctrl.label} 
+                    label={ctrl.label}
+                    added={() => props.addIngredient(ctrl.type)}
+                    removed={() => props.removeIngredient(ctrl.type)}
+                    disabled={props.disabled[ctrl.type]}
+                />
             ))}
+            <button className='OrderButton' disabled={!props.purchasable}>Order now!</button>
         </div>
     </>
     )

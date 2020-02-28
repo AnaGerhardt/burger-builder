@@ -1,5 +1,5 @@
 import React from 'react'
-import { BurgerDiv } from './burger-style'
+import './burger.css'
 import { BurgerIngredient } from '../'
 
 export const Burger = (props) => {
@@ -19,10 +19,10 @@ export const Burger = (props) => {
     }
 
     return (
-        <BurgerDiv>
+        <div className='Burger'>
             <BurgerIngredient type="bread-top" />
             {ingredientsArray}
             <BurgerIngredient type="bread-bottom" />
-        </BurgerDiv>
+        </div>
     )
 }
