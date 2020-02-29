@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Burger, BuildControls } from '../../components'
+import { Burger, BuildControls, Modal, OrderSummary } from '../../components'
 
 export const BurgerBuilder = () => {
 
@@ -20,6 +20,7 @@ export const BurgerBuilder = () => {
 
     const [totalPrice, setTotalPrice] = useState(4)
     const [purchasable, setPurchasable] = useState(false)
+    const [purchasing, setPurchasing] = useState(false)
 
     const addIngredient = (type) => {
         let ingredientsCounter = ingredientState[type]
@@ -36,6 +37,7 @@ export const BurgerBuilder = () => {
         : null
         let priceCounter = totalPrice - INGREDIENT_PRICES[type]
         setTotalPrice(priceCounter)
+        updatePurchasable(ingredientState)
     }
 
     const disabledButton = { ...ingredientState }
@@ -51,11 +53,22 @@ export const BurgerBuilder = () => {
                 .reduce ((sum, el) => { //reduce array to one number, summing all elements, starting with 0
                     return sum + el //sum is the numbers array
                 }, 0)
-                setPurchasable(sum > 0)
+        setPurchasable(sum > 0)
+    }
+
+    const purchasingHandler = () => {
+        setPurchasing(true)
+    }
+
+    const purchasingCancel = () => {
+        setPurchasing(false)
     }
 
     return (
         <>
+            <Modal show={purchasing} modalClosed={purchasingCancel}>
+                <OrderSummary ingredients={ingredientState} />
+            </Modal>
             <Burger ingredients={ingredientState} />
             <BuildControls 
                 addIngredient={addIngredient} 
@@ -63,6 +76,7 @@ export const BurgerBuilder = () => {
                 disabled={disabledButton}
                 price={totalPrice}
                 purchasable={purchasable}
+                purchasingHandler={purchasingHandler}
             />
         </>
     )
