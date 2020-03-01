@@ -16,6 +16,14 @@ module.exports = {
             loader: 'css-loader',
             }]
         },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
+        },
     ]
   },
   devtool: "cheap-module-source-map",

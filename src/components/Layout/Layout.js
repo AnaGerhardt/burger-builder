@@ -1,11 +1,12 @@
 import React from 'react'
+import { Toolbar } from '../'
 
 export const Layout = (props) => {
 
     return (
     <>
-        <div>Toolbar, Sidedrawer, Backdrop</div>
-        <main style={{'marginTop':'16px'}}>{props.children}</main>
+        <Toolbar />
+        <main style={{'marginTop':'72px'}}>{props.children}</main>
     </>
     )
 }

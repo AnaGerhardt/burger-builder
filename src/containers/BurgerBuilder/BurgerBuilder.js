@@ -64,10 +64,19 @@ export const BurgerBuilder = () => {
         setPurchasing(false)
     }
 
+    const purchasingContinue = () => {
+        alert('You continue')
+    }
+
     return (
         <>
             <Modal show={purchasing} modalClosed={purchasingCancel}>
-                <OrderSummary ingredients={ingredientState} />
+                <OrderSummary 
+                    ingredients={ingredientState} 
+                    purchasingCancel={purchasingCancel}
+                    purchasingContinue={purchasingContinue}
+                    price={totalPrice}
+                />
             </Modal>
             <Burger ingredients={ingredientState} />
             <BuildControls 
