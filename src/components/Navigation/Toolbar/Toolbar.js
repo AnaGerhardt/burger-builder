@@ -8,8 +8,8 @@ export const Toolbar = () => {
         <>
             <header className='Toolbar'>
                 <div>MENU</div>
-                <Logo />
-                <nav>
+                <Logo height='80%' />
+                <nav className='DesktopOnly'>
                     <NavigationItems />
                 </nav>
             </header>
