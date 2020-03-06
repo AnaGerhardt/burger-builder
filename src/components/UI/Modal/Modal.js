@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './modal.css'
 import { Backdrop } from '../../'
 
 export const Modal = (props) => {
+
+    useEffect(() => {
+    },[props.show])
 
     return (
         <>

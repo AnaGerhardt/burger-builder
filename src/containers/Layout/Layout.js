@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Toolbar, SideDrawer } from '../'
+import { Toolbar, SideDrawer } from '../../components'
 
 export const Layout = (props) => {
 
-    const [showSideDrawer, setShowSideDrawer] = useState(true)
+    const [showSideDrawer, setShowSideDrawer] = useState(false)
 
     const sideDrawerClosed = () => {
         setShowSideDrawer(false)

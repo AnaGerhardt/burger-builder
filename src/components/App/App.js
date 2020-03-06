@@ -1,6 +1,5 @@
 import React from 'react'
-import { Layout } from '../'
-import { BurgerBuilder } from '../../containers'
+import { Layout, BurgerBuilder } from '../../containers'
 
 export const App = () => {
     return (
