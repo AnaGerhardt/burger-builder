@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Burger, BuildControls, Modal, OrderSummary } from '../../components'
+import { Burger, BuildControls, Modal, OrderSummary, Spinner } from '../../components'
+import axios from '../../axios-orders'
 
 export const BurgerBuilder = () => {
 
@@ -21,6 +22,7 @@ export const BurgerBuilder = () => {
     const [totalPrice, setTotalPrice] = useState(4)
     const [purchasable, setPurchasable] = useState(false)
     const [purchasing, setPurchasing] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const addIngredient = (type) => {
         let ingredientsCounter = ingredientState[type]
@@ -65,18 +67,40 @@ export const BurgerBuilder = () => {
     }
 
     const purchasingContinue = () => {
-        alert('You continue')
+        setLoading(true)
+        const order = {
+            ingredients: ingredientState,
+            price: totalPrice, //real app should calculate from server
+            customer: {
+                name: 'Max',
+                address: {
+                    street: 'Teststreet 1',
+                    zipCode: '12345',
+                    country: 'Germany'
+                },
+                email: 'test@test.com'
+            },
+            deliveryMethod: 'fastest'
+        }
+        axios.post('/orders.json', order)
+            .then(response => setLoading(false), setPurchasing(false))
+            .catch(error => setLoading(false), setPurchasing(false))
+
     }
 
     return (
         <>
             <Modal show={purchasing} modalClosed={purchasingCancel}>
-                <OrderSummary 
-                    ingredients={ingredientState} 
-                    purchasingCancel={purchasingCancel}
-                    purchasingContinue={purchasingContinue}
-                    price={totalPrice}
-                />
+                {loading ? (
+                    <Spinner />
+                ) : (
+                    <OrderSummary 
+                        ingredients={ingredientState} 
+                        purchasingCancel={purchasingCancel}
+                        purchasingContinue={purchasingContinue}
+                        price={totalPrice}
+                    />
+                )}
             </Modal>
             <Burger ingredients={ingredientState} />
             <BuildControls 

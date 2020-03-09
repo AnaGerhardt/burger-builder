@@ -5,7 +5,7 @@ import { Backdrop } from '../../'
 export const Modal = (props) => {
 
     useEffect(() => {
-    },[props.show])
+    },[props.show, props.children])
 
     return (
         <>
