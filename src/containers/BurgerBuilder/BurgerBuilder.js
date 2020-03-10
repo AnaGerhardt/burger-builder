@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Burger, BuildControls, Modal, OrderSummary, Spinner } from '../../components'
+import { ErrorHandler } from '../'
 import axios from '../../axios-orders'
 
-export const BurgerBuilder = () => {
+const BurgerBuilder = () => {
 
     const INGREDIENT_PRICES = {
         salad: 0.5,
@@ -114,3 +115,5 @@ export const BurgerBuilder = () => {
         </>
     )
 }
+
+export default ErrorHandler(BurgerBuilder, axios)
