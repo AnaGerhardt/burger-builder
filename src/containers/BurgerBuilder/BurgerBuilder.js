@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Burger, BuildControls, Modal, OrderSummary, Spinner } from '../../components'
 import { ErrorHandler } from '../'
 import axios from '../../axios-orders'
 
 const BurgerBuilder = () => {
+
+    const [ingredientState, setIngredientState] = useState('')
+
+    useEffect(() => {
+        axios.get('/ingredients.json')
+            .then(response => setIngredientState(response.data))
+    },[])
 
     const INGREDIENT_PRICES = {
         salad: 0.5,
@@ -11,14 +18,6 @@ const BurgerBuilder = () => {
         meat: 1.3,
         bacon: 0.7
     }
-
-    const [ingredientState, setIngredientState] = useState
-    ({
-        salad: 0,
-        bacon: 0,
-        cheese: 0,
-        meat: 0
-    })
 
     const [totalPrice, setTotalPrice] = useState(4)
     const [purchasable, setPurchasable] = useState(false)
@@ -103,15 +102,21 @@ const BurgerBuilder = () => {
                     />
                 )}
             </Modal>
-            <Burger ingredients={ingredientState} />
-            <BuildControls 
-                addIngredient={addIngredient} 
-                removeIngredient={removeIngredient}
-                disabled={disabledButton}
-                price={totalPrice}
-                purchasable={purchasable}
-                purchasingHandler={purchasingHandler}
-            />
+            {ingredientState ? (
+                <>
+                <Burger ingredients={ingredientState} />
+                <BuildControls 
+                    addIngredient={addIngredient} 
+                    removeIngredient={removeIngredient}
+                    disabled={disabledButton}
+                    price={totalPrice}
+                    purchasable={purchasable}
+                    purchasingHandler={purchasingHandler}
+                />
+                </>
+            ) : (
+                <Spinner />
+            )}
         </>
     )
 }
