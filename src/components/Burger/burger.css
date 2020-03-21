@@ -12,7 +12,7 @@
 
 @media (max-width: 727px) {
     .Burger {
-        width: 300px;
+        /* width: 300px; */
         height: 300px;
     }
 }

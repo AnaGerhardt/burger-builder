@@ -1,5 +1,6 @@
 import React from 'react'
-import { Layout } from '../../containers'
+import { Route } from 'react-router-dom'
+import { Layout, Checkout } from '../../containers'
 import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder'
 
 export const App = () => {
@@ -8,6 +9,7 @@ export const App = () => {
             <div>
                 <Layout>
                     <BurgerBuilder />
+                    <Checkout />
                 </Layout>
             </div>
         </>
