@@ -4,7 +4,11 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: "development",
   entry: './src/index.js',
-  output: { filename: "bundle.js" },
+  output: { 
+    filename: "bundle.js", 
+    // publicPath: '/', 
+    // path: path.resolve(__dirname, 'dist'),
+  },
   module: {
     rules: [
         { test: /\.(jsx|js)?$/, loader: ['babel-loader', 'eslint-loader'] },
@@ -28,9 +32,8 @@ module.exports = {
   },
   devtool: "cheap-module-source-map",
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000
+    port: 9000,
+    // historyApiFallback: true,
   },
   plugins: [new HtmlWebpackPlugin({
     template: './src/index.html'
