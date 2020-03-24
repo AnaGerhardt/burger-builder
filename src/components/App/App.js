@@ -8,7 +8,7 @@ export const App = () => {
         <>
             <div>
                 <Layout>
-                    <Route path="/#checkout" component={Checkout} />
+                    <Route path="/checkout" component={Checkout} />
                     <Route path="/" exact component={BurgerBuilder} />
                 </Layout>
             </div>

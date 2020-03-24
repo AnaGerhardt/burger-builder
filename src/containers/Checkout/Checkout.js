@@ -25,7 +25,7 @@ export const Checkout = (props) => {
     }
 
     const checkoutContinue = () => {
-        props.history.replace('/checkout/contact-data')
+        props.history.replace('/#checkout/contact-data')
     }
 
     return (
