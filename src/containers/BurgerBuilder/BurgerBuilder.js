@@ -67,33 +67,15 @@ const BurgerBuilder = (props) => {
     }
 
     const purchasingContinue = () => {
-        // setLoading(true)
-        // const order = {
-        //     ingredients: ingredientState,
-        //     price: totalPrice, //real app should calculate from server
-        //     customer: {
-        //         name: 'Max',
-        //         address: {
-        //             street: 'Teststreet 1',
-        //             zipCode: '12345',
-        //             country: 'Germany'
-        //         },
-        //         email: 'test@test.com'
-        //     },
-        //     deliveryMethod: 'fastest'
-        // }
-        // axios.post('/orders.json', order)
-        //     .then(response => setLoading(false), setPurchasing(false))
-        //     .catch(error => setLoading(false), setPurchasing(false))
-
         const queryParams = []
         for (let i in ingredientState) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(ingredientState[i]))
         }
+        queryParams.push('price=' + totalPrice)
         const queryString = queryParams.join('&')
 
         props.history.push({
-            pathname: '/#checkout',
+            pathname: '/checkout',
             search: '?' + queryString
         })
     }
