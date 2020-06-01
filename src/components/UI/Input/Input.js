@@ -4,12 +4,16 @@ import './input.css'
 export const Input = (props) => {
     
     let inputElement = null;
+    const inputClasses = ['inputElement']
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push('Invalid')
+    }  
     
     switch (props.elementType) {
         case ('input'):
             inputElement = 
                 <input 
-                    className='InputElement' 
+                    className={inputClasses.join(' ')}
                     {...props.elementConfig} 
                     value={props.value} 
                     onChange={props.changed}
@@ -18,7 +22,7 @@ export const Input = (props) => {
         case ('textarea'):
             inputElement = 
                 <textarea 
-                    className='InputElement' 
+                    className={inputClasses.join(' ')} 
                     {...props.elementConfig} 
                     value={props.value} 
                     onChange={props.changed}
@@ -27,7 +31,7 @@ export const Input = (props) => {
         case ('select'):
             inputElement = (
                 <select 
-                    className='InputElement' 
+                    className={inputClasses.join(' ')}
                     value={props.value} 
                     onChange={props.changed}
                 >
@@ -42,7 +46,7 @@ export const Input = (props) => {
         default:
             inputElement = 
                 <input 
-                    className='InputElement' 
+                    className={inputClasses.join(' ')} 
                     {...props.elementConfig} 
                     value={props.value} 
                     onChange={props.changed}

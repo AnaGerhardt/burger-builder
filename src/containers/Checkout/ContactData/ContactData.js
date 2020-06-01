@@ -16,7 +16,8 @@ export const ContactData = (props) => {
             validation: {
                 required: true
             },
-            valid: false
+            valid: false,
+            touched: false
         },
         street: {
             elementType: "input",
@@ -28,7 +29,8 @@ export const ContactData = (props) => {
             validation: {
                 required: true
             },
-            valid: false
+            valid: false,
+            touched: false
         },
         zipCode: {
             elementType: "input",
@@ -42,7 +44,8 @@ export const ContactData = (props) => {
                 minLength: 5,
                 maxLength: 5
             },
-            valid: false
+            valid: false,
+            touched: false
         },
         country: {
             elementType: "input",
@@ -54,7 +57,8 @@ export const ContactData = (props) => {
             validation: {
                 required: true
             },
-            valid: false
+            valid: false,
+            touched: false
         },
         email: {
             elementType: "input",
@@ -66,7 +70,8 @@ export const ContactData = (props) => {
             validation: {
                 required: true
             },
-            valid: false
+            valid: false,
+            touched: false
         },
         deliveryMethod: {
             elementType: "select",
@@ -76,10 +81,13 @@ export const ContactData = (props) => {
                     {value: 'cheapest', displayValue: 'Cheapest'}
                 ]
             },
-            value: ''
+            validation: {},
+            value: '',
+            valid: true
         }
     })
     const [loading, setLoading] = useState(false)
+    const [formIsValid, setFormIsValid] = useState(false)
 
     const orderHandler = (e) => {
         e.preventDefault()
@@ -106,11 +114,11 @@ export const ContactData = (props) => {
         }
 
         if (rules.minLength) {
-            isValid = value.length >= rules.minLength
+            isValid = value.length >= rules.minLength && isValid
         }
         
         if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength
+            isValid = value.length <= rules.maxLength && isValid
         }
 
         return isValid
@@ -130,7 +138,13 @@ export const ContactData = (props) => {
         const updatedFormElement = {...updatedForm[inputIdentifier]}
         updatedFormElement.value = event.target.value
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation)
+        updatedFormElement.touched = true
         updatedForm[inputIdentifier] = updatedFormElement
+        let formIsValid = true
+        for (let inputIdentifier in updatedForm) {
+            formIsValid = updatedForm[inputIdentifier].valid && formIsValid
+        }
+        setFormIsValid(formIsValid)
         setOrderForm(updatedForm)
     }
 
@@ -145,10 +159,13 @@ export const ContactData = (props) => {
                         elementType={formElement.config.elementType} 
                         elementConfig={formElement.config.elementConfig}  
                         value={formElement.config.value} 
+                        invalid={!formElement.config.valid}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
                         changed={() => inputChangedHandler(event, formElement.id)}
                     />     
                 ))}
-                <Button btnType="Success">ORDER</Button>
+                <Button btnType="Success" disabled={!formIsValid}>ORDER</Button>
             </form>
         </div>
         )
